@@ -28,7 +28,6 @@ public class AddTwoNumbers2 {
             l2 = l2.next;
         }
 
-        System.out.println(tmp_ans);
         Collections.reverse(tmp_ans);
         ListNode ans = new ListNode(tmp_ans.remove(0));
         for (Integer integer : tmp_ans) {
@@ -68,7 +67,7 @@ public class AddTwoNumbers2 {
 
         ListNode ans = addTwoNumbers(l1, l2);
         while(true){
-            System.out.println(ans.val);
+            System.out.print(ans.val);
             if(Objects.isNull(ans.next)){
                 break;
             }
