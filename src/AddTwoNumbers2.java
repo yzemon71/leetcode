@@ -6,31 +6,26 @@ import java.util.Objects;
 public class AddTwoNumbers2 {
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         List<Integer> tmp_ans = new ArrayList<>();
-        ListNode tmp1 = l1;
-        ListNode tmp2 = l2;
         int flag = 0;
         while (true) {
-            if (Objects.isNull(tmp1) && Objects.isNull(tmp2)) {
+            if (l1 == null && l2 == null) {
                 if (flag == 1){
                     tmp_ans.add(flag);
                 }
                 break;
-            } else if (Objects.isNull(tmp1)) {
-                tmp1 = new ListNode();
-            } else if (Objects.isNull(tmp2)){
-                tmp2 = new ListNode();
+            } else if (l1 == null) {
+                l1 = new ListNode();
+            } else if (l2 == null){
+                l2 = new ListNode();
             }
 
-            int aa = tmp1.val + tmp2.val + flag;
-            flag = 0;
-            if (aa >= 10) {
-                aa -= 10;
-                flag = 1;
-            }
-            tmp_ans.add(aa);
+            int sum = l1.val + l2.val + flag;
+            flag = sum / 10;
+            sum = sum % 10;
+            tmp_ans.add(sum);
 
-            tmp1 = tmp1.next;
-            tmp2 = tmp2.next;
+            l1 = l1.next;
+            l2 = l2.next;
         }
 
         System.out.println(tmp_ans);
