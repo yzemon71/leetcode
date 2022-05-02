@@ -16,24 +16,22 @@ class Solution {
             return s;
         }
 
-        List<String> inputList = Arrays.asList(s.split(""));
-        Map<Integer,List<String>> mp = new HashMap<>();
+        List<StringBuilder> inputList = new ArrayList<>();
         for (int i = 0; i < numRows; i++) {
-            mp.put(i, new ArrayList<>());
+            StringBuilder tmp = new StringBuilder();
+            inputList.add(tmp);
         }
 
         int index = 0;
         boolean isWrap = false;
-        for (int i = 0; i < inputList.size(); i++) {
+        for (int i = 0; i < s.length(); i++) {
             if(index == 0){
                 isWrap = false;
             }else if(index == numRows-1){
                 isWrap = true;
             }
-            
-            List<String> tmpList = mp.get(index);
-            tmpList.add(inputList.get(i));
-            mp.put(index, tmpList);
+
+            inputList.get(index).append(s.charAt(i));
 
             if(isWrap){
                 index--;
@@ -42,11 +40,11 @@ class Solution {
             }
         }
 
-        List<String> result = new ArrayList<>();
-        for (int i = 0; i < numRows; i++) {
-            result.addAll(mp.get(i));
+        StringBuilder sb = new StringBuilder();
+        for (StringBuilder row: inputList) {
+            sb.append(row);
         }
-        return String.join("", result);
+        return sb.toString();
     }
 }
 // @lc code=end
