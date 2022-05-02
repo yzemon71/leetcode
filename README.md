@@ -1,5 +1,2 @@
 # leetcode
-
-| Problem | Date      | 
-| ------- | --------- | 
-| TwoSum  | 2022/1/30 | 
+* Using https://github.com/LeetCode-OpenSource/vscode-leetcode
