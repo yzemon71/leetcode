@@ -10,27 +10,31 @@ import java.util.regex.Pattern;
 
 class Solution {
     public int myAtoi(String s) {
-        Pattern p = Pattern.compile("^[ ]*[-+]?[0-9]+");
-        Matcher m = p.matcher(s);
-        int rev = 0;
-        if(!m.find()){
+        int strLen = s.length();
+        if(strLen == 0){
             return 0;
         }
-        String x = m.group().replace(" ", "");
-        int sign = 1;
-        if(x.charAt(0) == '-'){
-            sign = -1;
-            x = x.substring(1, x.length());
-        } else if(x.charAt(0) == '+'){
-            x = x.substring(1, x.length());
+
+        int index = 0;
+        while(index < strLen && s.charAt(index) == ' '){
+            index++;
         }
 
-        while (x.length() != 0) {
-            int pop = sign * Character.getNumericValue(x.charAt(0));
-            x = x.substring(1, x.length());
+        int sign = 1;
+        if(index < strLen && s.charAt(index) == '-'){
+            sign = -1;
+            index++;
+        } else if(index < strLen && s.charAt(index) == '+'){
+            index++;
+        }
+
+        int rev = 0;
+        while (index < strLen && '0' <= s.charAt(index) && s.charAt(index) <= '9') {
+            int pop = sign * Character.getNumericValue(s.charAt(index));
             if (rev > Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) return Integer.MAX_VALUE;
             if (rev < Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) return Integer.MIN_VALUE;
             rev = rev * 10 + pop;
+            index++;
         }
         return rev;
     }
