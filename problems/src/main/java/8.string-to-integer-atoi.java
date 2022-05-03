@@ -5,9 +5,6 @@
 */
 
 // @lc code=start
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 class Solution {
     public int myAtoi(String s) {
         int strLen = s.length();
