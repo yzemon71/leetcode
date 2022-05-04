@@ -10,38 +10,25 @@ import java.util.Map;
 // @lc code=start
 class Solution {
     public int romanToInt(String s) {
-        Map<String, Integer> mp = new HashMap<>();
-        mp.put("M",1000);
-        mp.put("CM",900);
-        mp.put("D",500);
-        mp.put("CD",400);
-        mp.put("C",100);
-        mp.put("XC",90);
-        mp.put("L",50);
-        mp.put("XL",40);
-        mp.put("X",10);
-        mp.put("IX",9);
-        mp.put("V",5);
-        mp.put("IV",4);
-        mp.put("I",1);
-
-        int result = 0;
-        int i = 0;
-        while(i < s.length()){
-            StringBuilder sb = new StringBuilder();
-            sb.append(s.charAt(i));
-            int tmp = mp.get(sb.toString());
-            if(i != s.length()-1){
-                sb.append(s.charAt(i+1));
+        int num = 0;
+        int total = 0;
+        for (int i = s.length()-1; i >= 0; i--) {
+            switch (s.charAt(i)) {
+                case 'I': num = 1; break;
+                case 'V': num = 5; break;
+                case 'X': num = 10; break;
+                case 'L': num = 50; break;
+                case 'C': num = 100; break;
+                case 'D': num = 500; break;
+                case 'M': num = 1000; break;
             }
-            if(mp.get(sb.toString()) != null){
-                tmp = mp.get(sb.toString());
-                i++;
+            if(num * 4 < total){
+                total -= num;
+            }else{
+                total += num;
             }
-            result += tmp;
-            i++;
         }
-        return result;        
+        return total;
     }
 }
 // @lc code=end
