@@ -7,52 +7,17 @@
 // @lc code=start
 class Solution {
     public String intToRoman(int num) {
-        int[] digit = {0,0,0,0};
-        for (int i = 0; i < digit.length; i++) {
-            digit[i] = num%10;
-            num /= 10;
-        }
-        return roman("M", "", "", digit[3]) + 
-            roman("C", "D", "M", digit[2]) + 
-            roman("X", "L", "C", digit[1]) + 
-            roman("I", "V", "X", digit[0]);
+        int[] val = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+        String[] key = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
-    }
-    public String roman(String one, String five, String ten, int num){
-        String result = "";
-        switch (num) {
-            case 1:
-                result = one;
-                break;
-            case 2:
-                result = one + one;
-                break;
-            case 3:
-                result = one + one + one;
-                break;
-            case 4:
-                result = one + five;
-                break;
-            case 5:
-                result = five;
-                break;
-            case 6:
-                result = five + one;
-                break;
-            case 7:
-                result = five + one + one;
-                break;
-            case 8:
-                result = five + one + one + one;
-                break;
-            case 9:
-                result = one + ten;
-                break;
-            default:
-                result = "";
-                break;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < val.length; i++) {
+            while(num >= val[i]){
+                sb.append(key[i]);
+                num -= val[i];
+            }
         }
-        return result;
+        return sb.toString();
     }
 }
 // @lc code=end
