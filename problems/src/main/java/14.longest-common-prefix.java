@@ -13,22 +13,11 @@ class Solution {
 
         String result = strs[0];
         for (String s : strs) {
-            int len = result.length();
-            StringBuilder sb = new StringBuilder();
-            if(result.length() > s.length()){
-                len = s.length();
-            }
-            for (int i = 0; i < len; i++) {
-                if(result.charAt(i) == s.charAt(i)){
-                    sb.append(result.charAt(i));
-                }else{
-                    break;
+            while(s.indexOf(result) != 0){
+                result = result.substring(0, result.length()-1);
+                if(result.isEmpty()){
+                    return "";
                 }
-            }
-            if(sb.length() == 0){
-                return "";
-            }else{
-                result = sb.toString();
             }
         }
 
