@@ -1,5 +1,7 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
  * @lc app=leetcode id=20 lang=java
@@ -11,22 +13,18 @@ import java.util.Deque;
 class Solution {
     public boolean isValid(String s) {
         Deque<Character> dq = new ArrayDeque<>();
+        Map<Character, Character> mp = new HashMap<>();
+        mp.put('(', ')');
+        mp.put('{', '}');
+        mp.put('[', ']');
         for (int i = 0; i < s.length(); i++) {
             char brackets = s.charAt(i);
-            if(brackets == '(' || brackets == '[' || brackets == '{'){
+            if(mp.containsKey(brackets)){
                 dq.push(brackets);
-            }else if(brackets == ')' || brackets == ']' || brackets == '}'){
-                if(dq.isEmpty()){
-                    return false;
-                }else if(dq.getFirst() == '(' && brackets == ')'){
-                    dq.pop();
-                }else if(dq.getFirst() == '{' && brackets == '}'){
-                    dq.pop();
-                }else if(dq.getFirst() == '[' && brackets == ']'){
-                    dq.pop();
-                }else{
-                    return false;
-                }
+            }else if(!dq.isEmpty() && mp.get(dq.getFirst()) == brackets){
+                dq.pop();
+            }else{
+                return false;
             }
         }
         return dq.isEmpty();
