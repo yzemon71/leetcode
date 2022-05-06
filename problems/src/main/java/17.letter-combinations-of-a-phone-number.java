@@ -30,21 +30,19 @@ class Solution {
             return mp.get(digits.charAt(0));
         }
 
-        int len = 1;
-        List<List<String>> phone = new ArrayList<>();
+        int letterCombLen = 1;
         for (int i = 0; i < digits.length(); i++) {
-            List<String> tmp = mp.get(digits.charAt(i));
-            len *= tmp.size();
-            phone.add(tmp);
+            letterCombLen *= mp.get(digits.charAt(i)).size();
         }
 
-        for (int l = 0; l < len; l++) {
-            int tmp = 1;
+        for (int l = 0; l < letterCombLen; l++) {
+            int val = 1;
             StringBuilder sb = new StringBuilder();
             for (int i = digits.length()-1; i >= 0; i--) {
-                List<String> hoge = mp.get(digits.charAt(i));
-                sb.insert(0, hoge.get((l/tmp)%hoge.size()));
-                tmp *= hoge.size();
+                List<String> letter = mp.get(digits.charAt(i));
+                int letterSize = letter.size();
+                sb.insert(0, letter.get( (l/val) % letterSize ));
+                val *= letterSize;
             }
             result.add(sb.toString());
         }
