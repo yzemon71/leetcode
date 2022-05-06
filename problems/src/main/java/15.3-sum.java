@@ -22,23 +22,32 @@ class Solution {
             return new ArrayList<>(r);
         }
 
-        for (int i = 0; i < nums.length; i++) {
-            int comp;
-            Map<Integer, Integer> mp = new HashMap<>();
-            for (int j = i+1; j < nums.length; j++) {
-                comp = (nums[i] + nums[j]) * -1;
-                if(mp.containsKey(comp)){
-                    List<Integer> tmp = new ArrayList<>();
-                    tmp.add(nums[i]);
-                    tmp.add(nums[mp.get(comp)]);
-                    tmp.add(nums[j]);
-                    Collections.sort(tmp);
-                    r.add(tmp);
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length-2; i++) {
+            if(nums[i] > 0){
+                break;
+            }
+            if(i != 0 && nums[i] == nums[i-1]){
+                continue;
+            }
+            int target = nums[i] * -1;
+            for (int left = i+1, right = nums.length-1; left < right;) {
+                int sum = nums[left] + nums[right];
+                if(sum > target){
+                    right--;
+                }else if(sum < target){
+                    left++;
+                }else{
+                    r.add(List.of(nums[i], nums[left], nums[right]));
+                    left++;
+                    while(left < right && nums[left] == nums[left-1]){
+                        left++;
+                    }
                 }
-                mp.put(nums[j], j);
             }
         }
-        
+
         return new ArrayList<>(r);
     }
 }
