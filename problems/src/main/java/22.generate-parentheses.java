@@ -14,11 +14,16 @@ class Solution {
     }
     
     public List<String> backtrack(String s, int left, int right){
-        if(left == 0 && right == 0 && isValid(s)){
+        if(left == 0 && right == 0){
             return List.of(s);
         }
 
         List<String> result = new ArrayList<>();
+        
+        if( (left > 0 && right == 0) || (left > right) ){
+            return result;
+        }
+
         if(left > 0){
             result.addAll(backtrack(s+"(", left-1, right));
         }
@@ -28,26 +33,6 @@ class Solution {
 
         return result;
     }
-
-    public boolean isValid(String s) {
-        Deque<Character> dq = new ArrayDeque<>();
-        Map<Character, Character> mp = new HashMap<>();
-        mp.put('(', ')');
-        mp.put('{', '}');
-        mp.put('[', ']');
-        for (int i = 0; i < s.length(); i++) {
-            char brackets = s.charAt(i);
-            if(mp.containsKey(brackets)){
-                dq.push(brackets);
-            }else if(!dq.isEmpty() && mp.get(dq.getFirst()) == brackets){
-                dq.pop();
-            }else{
-                return false;
-            }
-        }
-        return dq.isEmpty();
-    }
-
 }
 // @lc code=end
 
