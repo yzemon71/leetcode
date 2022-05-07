@@ -27,7 +27,7 @@ class Solution {
         if(head.next == null){
             return null;
         }
-
+        
         return backtrack(head, 0, n);
     }
 
