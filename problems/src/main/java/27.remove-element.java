@@ -7,12 +7,18 @@
 // @lc code=start
 class Solution {
     public int removeElement(int[] nums, int val) {
-        List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
-        list.removeAll(List.of(val));
-        for (int i = 0; i < list.size(); i++) {
-            nums[i] = list.get(i);
+        int[] tmp = nums;
+        int index = 0;
+        int removeCount = 0;
+        for (int i : tmp) {
+            if(i == val){
+                removeCount++;
+                continue;
+            }
+            nums[index] = i;
+            index++;
         }
-        return list.size();
+        return nums.length - removeCount;
     }
 }
 // @lc code=end
